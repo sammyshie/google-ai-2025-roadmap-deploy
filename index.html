@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google AI 2025 技術推動歷程圖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --g-blue: #4285F4;
+            --g-red: #DB4437;
+            --g-yellow: #F4B400;
+            --g-green: #0F9D58;
+            --bg-light: #f8f9fa;
+            --text-dark: #202124;
+            --text-gray: #5f6368;
+            --card-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --hover-shadow: 0 10px 15px rgba(0,0,0,0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--g-blue);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-gray);
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--g-blue);
+        }
+
+        /* Hero Section */
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #e8f0fe 0%, #ffffff 100%);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .highlight-box {
+            background: white;
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #eee;
+        }
+
+        .highlight-box strong {
+            color: var(--g-blue);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 60px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--g-blue);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Timeline / Quarters */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            border: none;
+            background: white;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-gray);
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s;
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: var(--g-blue);
+            color: white;
+        }
+
+        .tab-btn:nth-child(2).active { background: var(--g-red); }
+        .tab-btn:nth-child(3).active { background: var(--g-yellow); color: #333; }
+        .tab-btn:nth-child(4).active { background: var(--g-green); }
+
+        .quarter-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .quarter-content.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .month-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            border-top: 5px solid var(--g-blue);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        /* Different border colors for visual variety */
+        .quarter-content .month-card:nth-child(2) { border-top-color: var(--g-red); }
+        .quarter-content .month-card:nth-child(3) { border-top-color: var(--g-yellow); }
+
+        .month-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .month-header {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .month-badge {
+            display: inline-block;
+            background: #e8f0fe;
+            color: var(--g-blue);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .month-summary {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .detail-btn {
+            align-self: flex-start;
+            background: transparent;
+            border: 2px solid var(--text-gray);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .detail-btn:hover {
+            background: var(--text-dark);
+            color: white;
+            border-color: var(--text-dark);
+        }
+
+        /* Pillars Grid */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .pillar-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #eee;
+            transition: 0.3s;
+        }
+
+        .pillar-card:hover {
+            border-color: var(--g-blue);
+            box-shadow: var(--card-shadow);
+        }
+
+        .pillar-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Stats Section */
+        .stats-container {
+            background: var(--text-dark);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: var(--g-yellow);
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            color: #ccc;
+        }
+
+        /* Modal (Popup) Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 2000; /* High Z-index to cover everything */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 16px;
+            padding: 30px;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.open .modal-content {
+            transform: scale(1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-gray);
+            background: none;
+            border: none;
+        }
+
+        .modal-body ul {
+            padding-left: 20px;
+            margin-top: 15px;
+        }
+
+        .modal-body li {
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .modal-body ul ul {
+            margin-top: 5px;
+            color: var(--text-gray);
+            list-style-type: circle;
+        }
+
+        /* Footer */
+        footer {
+            background: #fff;
+            padding: 40px 5%;
+            text-align: center;
+            border-top: 1px solid #eee;
+            margin-top: 60px;
+        }
+
+        .footer-quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .tabs { flex-direction: column; }
+            .tab-btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <span style="color: #4285F4">G</span>
+            <span style="color: #DB4437">o</span>
+            <span style="color: #F4B400">o</span>
+            <span style="color: #4285F4">g</span>
+            <span style="color: #0F9D58">l</span>
+            <span style="color: #DB4437">e</span>
+            &nbsp;AI 2025
+        </div>
+        <div class="nav-links">
+            <a href="#timeline">時間軸</a>
+            <a href="#pillars">技術主軸</a>
+            <a href="#stats">關鍵數據</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Google AI 2025 年度技術推動歷程</h1>
+        <p>從 Gemini 2.0 到 3.0，見證 AI 如何重塑搜尋、硬體與人類生活的每一刻。</p>
+        <div class="highlight-box">
+            年度金句：<strong>「速度就是最強武器，Flash 系列貫穿全年。」</strong>
+        </div>
+    </header>
+
+    <section id="timeline">
+        <h2 class="section-title">📅 2025 年度發展時間軸</h2>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openQuarter('q1')">Q1 第一季：AI 落地</button>
+            <button class="tab-btn" onclick="openQuarter('q2')">Q2 第二季：開發者盛會</button>
+            <button class="tab-btn" onclick="openQuarter('q3')">Q3 第三季：硬體革命</button>
+            <button class="tab-btn" onclick="openQuarter('q4')">Q4 第四季：新紀元</button>
+        </div>
+
+        <div id="q1" class="quarter-content active">
+            <div class="month-card">
+                <div>
+                    <span class="month-badge">1月 January</span>
+                    <h3 class="month-header">AI 落地起跑</h3>
+                    <p class="month-summary">Gemini 深入 Android 與三星手機，教育工具全面升級。</p>
+                </div>
+                <button class="detail-btn" onclick="openModal('m1')">查看詳細更新</button>
+            </div>
+            <div class="month-card">
+                <div>
+                    <span class="month-badge">2月 February</span>
+                    <h3 class="month-header">Gemini 2.0 正式版</h3>
+                    <p class="month-summary">模型正式向大眾開放，程式碼助手免費化，AI 進入科學研究。</p>
+                </div>
+                <button class="detail-btn" onclick="openModal('m2')">查看詳細更新</button>
+            </div>
+            <div class="month-card">
+                <div>
+                    <span class="month-badge">3月 March</span>
+                    <h3 class="month-header">搜尋與模型里程碑</h3>
+                    <p class="month-summary">Gemini 2.5 長文本升級，Gemma 3 開放模型，AI Mode 挑戰搜尋。</p>
+                </div>
+                <button class="detail-btn" onclick="openModal('m3')">查看詳細更新</button>
+            </div>
+        </div>
+
+        <div id="q2" class="quarter-content">
+            <div class="month-card">
+                <div>
+                    <span class="month-badge">4月 April</span>
+                    <h3 class="month-header">基礎設施與多媒體</h3>
+                    <p class="month-summary">Veo 2 4K 影像生成，海豚溝通研究，新一代 TPU 晶片。</p>
+                </div>
+                <button class="detail-btn" onclick="openModal('m4')">查看詳細更新</button>
+            </div>
+            <div class="month-card">
+                <div>
+                    <span class="month-badge">5月 May</span>
+                    <h3 class="month-header">Google I/O 2025 🎪</h3>
+                    <p class="month-summary">Project Astra 全方位助理，Flow AI 影片平台，Google AI Ultra 訂閱。</p>
+                </div>
+                <button class="detail-btn" onclick="openModal('m5')">查看詳細更新</button>
+            </div>
+            <div class="month-card">
+                <div>
+                    <span class="month-badge">6月 June</span>
+                    <h3 class="month-header">創作、搜尋與 Android</h3>
+                    <p class="month-summary">Gemini CLI 工具，Android 16 預覽，Search Live 即時探索。</p>
+                </div>
+                <button class="detail-btn" onclick="openModal('m6')">查看詳細更新</button>
+            </div>
+        </div>
+
+        <div id="q3" class="quarter-content">
+            <div class="month-card">
+                <div>
+                    <span class="month-badge">7月 July</span>
+                    <h3 class="month-header">提升效率與創意</h3>
+                    <p class="month-summary">Gemini 照片轉影片，Gmail 訂閱管理員，進階搜尋推理。</p>
+                </div>
+                <button class="detail-btn" onclick="openModal('m7')">查看詳細更新</button>
+            </div>
+            <div class="month-card">
+                <div>
+                    <span class="month-badge">8月 August</span>
+                    <h3 class="month-header">硬體與 Nano Banana 🍌</h3>
+                    <p class="month-summary">Pixel 10 (Tensor G5)，Nano Banana 影像編輯革命。</p>
+                </div>
+                <button class="detail-btn" onclick="openModal('m8')">查看詳細更新</button>
+            </div>
+            <div class="month-card">
+                <div>
+                    <span class="month-badge">9月 September</span>
+                    <h3 class="month-header">Chrome 與即時搜尋</h3>
+                    <p class="month-summary">Chrome AI 側邊欄，記憶體優化，Android 智慧寫作。</p>
+                </div>
+                <button class="detail-btn" onclick="openModal('m9')">查看詳細更新</button>
+            </div>
+        </div>
+
+        <div id="q4" class="quarter-content">
+            <div class="month-card">
+                <div>
+                    <span class="month-badge">10月 October</span>
+                    <h3 class="month-header">介面操作與醫療突破</h3>
+                    <p class="month-summary">Gemini Computer Use 代操作，Gemma 癌症路徑模型。</p>
+                </div>
+                <button class="detail-btn" onclick="openModal('m10')">查看詳細更新</button>
+            </div>
+            <div class="month-card">
+                <div>
+                    <span class="month-badge">11月 November</span>
+                    <h3 class="month-header">Gemini 3 正式發表 🚀</h3>
+                    <p class="month-summary">原生多模態模型，Nano Banana Pro，新一代 Maps 導航。</p>
+                </div>
+                <button class="detail-btn" onclick="openModal('m11')">查看詳細更新</button>
+            </div>
+            <div class="month-card">
+                <div>
+                    <span class="month-badge">12月 December</span>
+                    <h3 class="month-header">年終收尾：速度革命</h3>
+                    <p class="month-summary">Gemini 3 Flash，搜尋全面加速，年度 AI 趨勢回顧。</p>
+                </div>
+                <button class="detail-btn" onclick="openModal('m12')">查看詳細更新</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="pillars" style="background-color: white;">
+        <h2 class="section-title">🎯 五大技術主軸</h2>
+        <div class="pillars-grid">
+            <div class="pillar-card">
+                <div class="pillar-icon">🔍</div>
+                <h3>搜尋與資訊檢索</h3>
+                <p>從 AI Overviews 到 Search Live，挑戰多步驟推理與即時探索能力。</p>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-icon">🎨</div>
+                <h3>影像與多媒體</h3>
+                <p>Veo 2 與 Nano Banana 引領影像生成與編輯革命，支援 4K 與本地運算。</p>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-icon">💻</div>
+                <h3>開發者工具</h3>
+                <p>Code Assist 免費化，Gemini CLI 與 API 3.0 打造最強開發者生態。</p>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-icon">📱</div>
+                <h3>硬體整合</h3>
+                <p>Pixel 10 搭載台積電製程 Tensor G5，Android 系統層級 AI 全面感知。</p>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-icon">🏥</div>
+                <h3>垂直應用</h3>
+                <p>深入醫療癌症預測、跨物種溝通研究、科學文獻生成與教育輔助。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="stats">
+        <h2 class="section-title" style="color:white; border-color:white;">📊 關鍵數據</h2>
+        <div class="stats-container">
+            <div class="stat-item">
+                <h3>4個</h3>
+                <p>季度模型迭代<br>(2.0 → 2.5 → 3.0)</p>
+            </div>
+            <div class="stat-item">
+                <h3>50%+</h3>
+                <p>搜尋與回覆速度提升<br>(Flash 系列)</p>
+            </div>
+            <div class="stat-item">
+                <h3>60項</h3>
+                <p>橫跨軟硬體的<br>重大 AI 更新</p>
+            </div>
+            <div class="stat-item">
+                <h3>4K</h3>
+                <p>Veo 2 影片生成<br>解析度支援</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">×</button>
+            <h2 id="modal-title" style="color: var(--g-blue); margin-bottom: 15px;">標題</h2>
+            <div id="modal-body" class="modal-body">
+                </div>
+        </div>
+    </div>
+
+    <footer>
+        <blockquote class="footer-quote">
+            "現在的發展趨勢真是讓人難以置信，我們公司各部門交付產品的速度都非常迅速。" 
+            <br>— Sundar Pichai
+        </blockquote>
+        <p style="color: var(--text-gray); font-size: 0.9rem;">
+            &copy; 2025 Google AI Roadmap Visualization. Design for Educational Purpose.
+        </p>
+    </footer>
+
+    <script>
+        // Data Source for Modals
+        const monthData = {
+            'm1': {
+                title: '1月 - AI落地起跑',
+                content: `
+                    <ul>
+                        <li><strong>核心產品：</strong>
+                            <ul>
+                                <li>Gemini 驅動 Android 助手 (取代舊版 Assistant)</li>
+                                <li>Google TV 更新：影片即時總結、AI 生成螢幕保護程式</li>
+                            </ul>
+                        </li>
+                        <li><strong>Samsung Galaxy S25 系列：</strong>
+                            <ul>
+                                <li>畫圈搜尋 (Circle to Search) 進階版</li>
+                                <li>相簿生成式編輯</li>
+                            </ul>
+                        </li>
+                        <li><strong>教育工具 2025：</strong>
+                            <ul>
+                                <li>NotebookLM 音訊對話引導</li>
+                                <li>Google Classroom AI 輔助評分</li>
+                            </ul>
+                        </li>
+                        <li><strong>Gemini 2.0 Flash 測試版開放</strong></li>
+                    </ul>`
+            },
+            'm2': {
+                title: '2月 - AI實質影響力',
+                content: `
+                    <ul>
+                        <li><strong>Gemini 2.0 正式向大眾開放 🎯</strong></li>
+                        <li><strong>開發者福音：</strong>
+                            <ul>
+                                <li>Gemini Code Assist 免費化 (VS Code 自動補全)</li>
+                            </ul>
+                        </li>
+                        <li><strong>新領域探索：</strong>
+                            <ul>
+                                <li>職業探索 (Career Discovery)：Grow with Google 職缺媒合</li>
+                                <li>科學研究 AI (AI for Scientists)：閱讀百萬文獻生成假設</li>
+                            </ul>
+                        </li>
+                    </ul>`
+            },
+            'm3': {
+                title: '3月 - 搜尋與模型里程碑',
+                content: `
+                    <ul>
+                        <li><strong>模型升級：</strong> Gemini 2.5 (長文本)、Gemma 3 (開放權重/邊緣運算)</li>
+                        <li><strong>搜尋革新：</strong> AI Overviews 擴展、AI Mode 實驗功能 (挑戰 ChatGPT Search)</li>
+                        <li><strong>Gemini App：</strong> 免費整合 Spotify、Keep 等擴充功能</li>
+                        <li><strong>Gemini Canvas：</strong> 文件與程式碼互動空間上線</li>
+                    </ul>`
+            },
+            'm4': {
+                title: '4月 - 基礎設施與多媒體',
+                content: `
+                    <ul>
+                        <li><strong>Veo 2 影像生成模型：</strong> 支援 4K 解析度、長時間一致性</li>
+                        <li><strong>技術突破：</strong>
+                            <ul>
+                                <li>DolphinGemma：跨物種海豚溝通解碼</li>
+                                <li>Ironwood v6 TPU 晶片：Transformer 大規模推理專用</li>
+                            </ul>
+                        </li>
+                        <li><strong>Google Cloud Next 25：</strong> Vertex AI Agent Builder 發布</li>
+                    </ul>`
+            },
+            'm5': {
+                title: '5月 - Google I/O 2025 盛會 🎪',
+                content: `
+                    <ul>
+                        <li><strong>Project Astra：</strong> 全方位 AI 助理進度更新</li>
+                        <li><strong>Flow AI 影片平台：</strong> 文字控制鏡頭運鏡、燈光參數</li>
+                        <li><strong>Google AI Ultra 訂閱：</strong> 取代 Premium，提供 2TB + 頂尖模型</li>
+                        <li><strong>搜尋智慧：</strong> 支援多步驟推理與複雜規劃 (如五天旅行安排)</li>
+                    </ul>`
+            },
+            'm6': {
+                title: '6月 - 創作、搜尋與Android',
+                content: `
+                    <ul>
+                        <li><strong>Android 16 預覽：</strong> 系統層級螢幕感知、靈動島式 AI 提醒</li>
+                        <li><strong>Search Live：</strong> 相機畫面即時辨識 (如植物品種)</li>
+                        <li><strong>開發工具：</strong> Gemini CLI (終端機呼叫)、Gemini 2.5 Flash-Lite (物聯網專用)</li>
+                    </ul>`
+            },
+            'm7': {
+                title: '7月 - 提升效率與創意',
+                content: `
+                    <ul>
+                        <li><strong>影像魔法：</strong> Gemini 照片轉影片 (單張生成 3-5秒動態)</li>
+                        <li><strong>Gmail 訂閱管理員：</strong> 自動掃描並一鍵退訂</li>
+                        <li><strong>AI Mode：</strong> 學習引導功能，拆解複雜主題</li>
+                        <li><strong>Pixel Feature Drop：</strong> Gemini Live 下放舊款 Pixel</li>
+                    </ul>`
+            },
+            'm8': {
+                title: '8月 - 硬體與 Nano Banana 🍌',
+                content: `
+                    <ul>
+                        <li><strong>Pixel 10 + Tensor G5：</strong> 首款台積電代工晶片，本地 AI 效率大增</li>
+                        <li><strong>Nano Banana 登場 ⭐：</strong>
+                            <ul>
+                                <li>選取圖片區域文字直接替換</li>
+                                <li>影像編輯功能大躍進</li>
+                            </ul>
+                        </li>
+                        <li><strong>Deep Think 推理模式：</strong> 顯示邏輯推演過程 (CoT)</li>
+                    </ul>`
+            },
+            'm9': {
+                title: '9月 - Chrome與即時搜尋',
+                content: `
+                    <ul>
+                        <li><strong>Chrome AI：</strong> 側邊欄對話 (PDF/網頁)、智慧記憶體管理</li>
+                        <li><strong>Android 智慧寫作：</strong> Magic Compose 多風格回覆</li>
+                        <li><strong>Search Live 整合：</strong> Google Maps 實景標註路標與店家</li>
+                        <li><strong>UI 革新：</strong> Material 3 Expressive 介面色調自動調整</li>
+                    </ul>`
+            },
+            'm10': {
+                title: '10月 - 介面操作與醫療突破',
+                content: `
+                    <ul>
+                        <li><strong>Gemini 2.5 Computer Use：</strong> AI 代操作滑鼠、填表單</li>
+                        <li><strong>Veo 3.1 影像優化：</strong> 解決物理碰撞與手部瑕疵</li>
+                        <li><strong>Google Home：</strong> 語音查詢家事 (如孩子回家時間)</li>
+                        <li><strong>Gemma 癌症路徑模型：</strong> 結合 AlphaFold 預測藥物作用</li>
+                    </ul>`
+            },
+            'm11': {
+                title: '11月 - Gemini 3 正式發表 🚀',
+                content: `
+                    <ul>
+                        <li><strong>Gemini 3：</strong> 真正原生多模態，混合影音文字處理</li>
+                        <li><strong>Nano Banana Pro：</strong> 行動裝置優化，完全本地生成無需上網</li>
+                        <li><strong>Maps 沉浸式導航：</strong> AI 生成 3D 畫面，模擬真實光影天氣</li>
+                        <li><strong>Gemini App：</strong> 懸浮視窗操作與新交互介面</li>
+                    </ul>`
+            },
+            'm12': {
+                title: '12月 - 年終收尾：速度革命',
+                content: `
+                    <ul>
+                        <li><strong>Gemini 3 Flash：</strong> 保持理解力 + 毫秒級回應</li>
+                        <li><strong>搜尋全面 Flash 化：</strong> 回覆速度提升 50%+</li>
+                        <li><strong>Android 16 Feature Drop：</strong> AI 表情符號生成器</li>
+                        <li><strong>翻譯神經網路：</strong> 取代舊架構，解決口語化翻譯問題</li>
+                    </ul>`
+            }
+        };
+
+        // Tab Switching Logic
+        function openQuarter(quarterId) {
+            // Hide all quarters
+            document.querySelectorAll('.quarter-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            // Show selected quarter
+            document.getElementById(quarterId).classList.add('active');
+
+            // Update Tab Buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Modal Logic
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+
+        function openModal(monthKey) {
+            const data = monthData[monthKey];
+            if(data) {
+                modalTitle.textContent = data.title;
+                modalBody.innerHTML = data.content;
+                modalOverlay.classList.add('open');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal when clicking outside content
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+
+        // Smooth Scroll for Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
